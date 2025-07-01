@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración básica del documento -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wahl Professional | Herramientas Profesionales para Barberos</title>
+    
+    <!-- SEO básico -->
+    <meta name="description" content="Las mejores máquinas de corte profesional para barberos. Calidad Wahl desde 1919. Envíos a todo el país.">
+    
+    <!-- Hojas de estilo y favicon -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    
+    <!-- Iconos de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- comienzo del header -->
+    <header class="header">
+        <nav class="navbar">
+            <!-- Logo con link -->
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/img/logo.png" alt="Wahl Professional Logo" class="logo-img">
+                </a>
+            </div>
+            
+            <!-- Contenedor de elementos del lado derecho -->
+            <div class="nav-right">
+                <!-- Botón para cambiar tema claro/oscuro -->
+                <div class="cambio-tema">
+                    <button>
+                        <i class="fa-solid fa-sun" style="color: #FFD43B;"></i>
+                    </button>
+                </div>
+                
+                <!-- Menú principal de navegación -->
+                <ul class="menu">
+                    <li class="list-item"><a href="index.html" class="link active">INICIO</a></li>
+                    <li class="list-item"><a href="pages/machines.html" class="link">MAQUINAS</a></li>
+                    <li class="list-item"><a href="pages/about.html" class="link">NOSOTROS</a></li>
+                    <li class="list-item"><a href="pages/contact.html" class="link">CONTACTO</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección video de fondo -->
+    <section class="hero">
+        <div class="video-background">
+            <video autoplay loop muted playsinline>
+                <source src="assets/video/videoplayback.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        
+        <!-- Contenido principal del hero -->
+        <div class="hero-content">
+            <h1 class="hero-title">PRECISIÓN LEGENDARIA</h1>
+            <p class="hero-subtitle">Herramientas profesionales diseñadas para artistas del cabello</p>
+            <div class="hero-buttons">
+                <a href="pages/machines.html" class="cta-button">EXPLORAR COLECCIÓN</a>
+                <a href="#featured" class="cta-button secondary">VER DESTACADOS</a>
+            </div>
+        </div>
+        
+        <!-- Indicador para hacer scroll -->
+        <div class="scroll-down">
+            <span>Scroll</span>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- AQUI EMPIEZA Sección de productos destacados -->
+     <section class="featured" id="featured">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">MAQUINAS DESTACADAS</h2>
+                <p class="section-subtitle">Los modelos más vendidos por profesionales</p>
+            </div>
+            
+            <!-- Grid de productos (se cargan dinámicamente) -->
+            <div class="products-grid" id="featuredProducts">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
+            
+            <!-- Botón para ver todos los productos -->
+            <div class="text-center">
+                <a href="pages/machines.html" class="cta-button outline">VER TODAS LAS MÁQUINAS</a>
+            </div>
+        </div>
+    </section>
+    <!-- Scripts -->
+   <style>
+        /* Estilos sección de productos destacados */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #FFD700;
+            color: #000;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .product-actions {
+            margin-top: 1rem;
+        }
+        
+        .cta-button.small {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Skeleton loading */
+        .skeleton-card {
+            background: #eee;
+            border-radius: 8px;
+            height: 350px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+   <script>
+    // Función para mostrar productos destacados
+    function displayFeaturedProducts() {
+        const featuredContainer = document.getElementById('featuredProducts');
+        
+        if (!featuredContainer) return;
+        
+        // Obtener productos destacados del localStorage
+        const featuredProducts = JSON.parse(localStorage.getItem('wahlFeaturedProducts')) || [];
+        
+        // Si no hay productos destacados, mostrar mensaje
+        if (featuredProducts.length === 0) {
+            featuredContainer.innerHTML = '<p>No hay productos destacados disponibles</p>';
+            return;
+        }
+        
+        // Mostrar skeleton loading mientras se cargan
+        featuredContainer.innerHTML = `
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+        `;
+        
+        // Simular carga con un pequeño retraso
+        setTimeout(() => {
+            // Generar HTML para los productos destacados
+            featuredContainer.innerHTML = featuredProducts.map(product => {
+                return `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/img/products/${product.image}" alt="${product.name}" loading="lazy">
+                        <span class="featured-badge">Destacado</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-actions">
+                            <a href="pages/machines.html#product-${product.id}" class="cta-button small">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }, 800); // Retraso de 0.8 segundos para el efecto de carga
+    }
+
+    // Cargar productos cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', displayFeaturedProducts);
+</script>
+    <!-- AQUI TERMINA Sección de productos destacados -->
+            
+            
+
+    <!-- Sección de ventajas/beneficios -->
+    <section class="why-us">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">¿POR QUÉ ELEGIR WAHL?</h2>
+                <p class="section-subtitle">Más de un siglo de innovación y calidad</p>
+            </div>
+            
+            <!-- Grid de características destacadas -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Calidad Premium</h3>
+                    <p>Materiales de primera calidad y estándares de fabricación rigurosos.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Potencia Profesional</h3>
+                    <p>Motores de alto torque para cortes impecables todo el día.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Garantía Extendida</h3>
+                    <p>3 años de garantía en todos nuestros productos profesionales.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Soporte Técnico</h3>
+                    <p>Asistencia especializada y repuestos originales disponibles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de testimonios -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">OPINIONES DE PROFESIONALES</h2>
+                <p class="section-subtitle">Lo que dicen los barberos sobre nuestros productos</p>
+            </div>
+            
+            <!-- Slider de testimonios -->
+            <div class="testimonials-slider" id="testimonialsSlider">
+                <div class="testimonials-grid" id="testimonialsContainer">
+                    <!-- Las opiniones se cargarán dinámicamente -->
+                </div>
+                
+                <!-- Controles del slider -->
+                <div class="slider-controls">
+                    <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <!-- Botón para añadir testimonio -->
+            <div class="text-center">
+                <button id="addTestimonialBtn" class="cta-button yellow">AÑADIR TU OPINIÓN</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de blog/artículos -->
+    <section class="blog-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">CONSEJOS PROFESIONALES</h2>
+                <p class="section-subtitle">Aprende técnicas y mantenimiento de tus herramientas</p>
+            </div>
+            
+            <!-- Grid de artículos del blog -->
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="assets/img/products/100year.jpg" alt="Mantenimiento de máquinas">
+                        <div class="blog-date">15 JUN 2023</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Cómo mantener tus máquinas Wahl como nuevas</h3>
+                        <p>Aprende los pasos esenciales para el cuidado y mantenimiento de tus herramientas profesionales.</p>
+                        <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="assets/img/products/detailer.jpg" alt="Técnicas de corte">
+                        <div class="blog-date">28 MAY 2023</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Técnicas avanzadas de corte con máquina</h3>
+                        <p>Domina los cortes más demandados con estas técnicas profesionales paso a paso.</p>
+                        <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="assets/img/products/legend.jpg" alt="Comparativa de productos">
+                        <div class="blog-date">10 MAY 2023</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Guía completa de productos Wahl Professional</h3>
+                        <p>Descubre qué máquina se adapta mejor a tu estilo de trabajo y necesidades.</p>
+                        <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h3>ÚNETE A NUESTRA COMUNIDAD</h3>
+                <p>Recibe ofertas exclusivas, consejos profesionales y las últimas novedades</p>
+                
+                <!-- Formulario de suscripción -->
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Tu correo electrónico" required>
+                    <button type="submit" class="cta-button yellow">SUSCRIBIRME</button>
+                </form>
+                
+                <!-- Redes sociales -->
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para añadir testimonios (oculto por defecto) -->
+    <div id="testimonialModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>AGREGAR RESEÑA</h3>
+            <p>Comparte tu experiencia con nuestros productos</p>
+            
+            <!-- Formulario de testimonio -->
+            <form id="testimonialForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="userName">Nombre:</label>
+                        <input type="text" id="userName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userProfession">Profesión:</label>
+                        <input type="text" id="userProfession" required>
+                    </div>
+                </div>
+                
+                <!-- Valoración con estrellas -->
+                <div class="form-group">
+                    <label>Calificación:</label>
+                    <div class="rating-stars">
+                        <i class="far fa-star" data-rating="1"></i>
+                        <i class="far fa-star" data-rating="2"></i>
+                        <i class="far fa-star" data-rating="3"></i>
+                        <i class="far fa-star" data-rating="4"></i>
+                        <i class="far fa-star" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" id="userRating" required>
+                </div>
+                
+                <!-- Comentario -->
+                <div class="form-group">
+                    <label for="userComment">Comentario:</label>
+                    <textarea id="userComment" rows="5" required></textarea>
+                </div>
+                
+                <!-- Botón de enviar -->
+                <div class="form-actions">
+                    <button type="submit" class="cta-button yellow">ENVIAR RESEÑA</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Columna 1: Logo y descripción -->
+                <div class="footer-col">
+                    <img src="assets/img/logo.png" alt="Wahl Professional" class="footer-logo">
+                    <p>Desde 1919, proporcionando herramientas profesionales para barberos y peluqueros en todo el mundo.</p>
+                    
+                    <!-- Métodos de pago -->
+                    <div class="payment-methods">
+                        <h4>Métodos de pago:</h4>
+                        <div class="payment-icons">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-amex"></i>
+                            <i class="fab fa-cc-paypal"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Columna 2: Enlaces rápidos -->
+                <div class="footer-col">
+                    <h3>ENLACES RÁPIDOS</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="pages/machines.html">Máquinas</a></li>
+                        <li><a href="pages/about.html">Nosotros</a></li>
+                        <li><a href="pages/contact.html">Contacto</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Columna 3: Categorías de productos -->
+                <div class="footer-col">
+                    <h3>CATEGORÍAS</h3>
+                    <ul>
+                        <li><a href="pages/machines.html?category=cordless">Inalámbricas</a></li>
+                        <li><a href="pages/machines.html?category=corded">Con cable</a></li>
+                        <li><a href="pages/machines.html?category=clipper">Cortadoras</a></li>
+                        <li><a href="pages/machines.html?category=trimmer">Recortadoras</a></li>
+                        <li><a href="#">Accesorios</a></li>
+                        <li><a href="#">Kits profesionales</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Columna 4: Información de contacto -->
+                <div class="footer-col">
+                    <h3>CONTACTO</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Argentina 123, Neuquén, Argentina (8300)</li>
+                        <li><i class="fas fa-phone"></i> +54 299 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@wahl.com</li>
+                        <li><i class="fas fa-clock"></i> Lunes a Viernes: 9:00 - 18:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <p>&copy; 2023 Wahl Professional Argentina. Todos los derechos reservados.</p>
+                <div class="legal-links">
+                    <a href="#">Política de privacidad</a>
+                    <a href="#">Términos de servicio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js" type="module"></script>
+    <script src="js/testimonials.js" type="module"></script>
+</body>
+</html>

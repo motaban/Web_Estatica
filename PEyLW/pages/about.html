@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wahl Professional | Nosotros</title>
+    <meta name="description" content="Conoce la historia y filosofía de Wahl Professional, líder en herramientas para barberos desde 1919.">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos*/
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('../assets/img/about-bg.jpg') center/cover;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-section {
+            padding: 5rem 0;
+            background-color: #f9f9f9;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-content h2 {
+            font-size: 2.2rem;
+            color: #222;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .about-content h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 80px;
+            height: 3px;
+            background-color: #FFD700;
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .milestones {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .milestone {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .milestone h3 {
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .milestone p {
+            font-size: 0.9rem;
+            color: #777;
+            margin: 0;
+        }
+        
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .team-section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .team-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .team-section p {
+            font-size: 1.2rem;
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-image {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-info h3 {
+            margin-bottom: 0.5rem;
+            color: #222;
+        }
+        
+        .member-info p {
+            color: #FFD700;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .member-social a {
+            color: #777;
+            transition: color 0.3s;
+        }
+        
+        .member-social a:hover {
+            color: #FFD700;
+        }
+        
+        .values-section {
+            padding: 5rem 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        
+        .values-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .values-section p.subtitle {
+            font-size: 1.2rem;
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .value-card i {
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        
+        .value-card h3 {
+            margin-bottom: 1rem;
+            color: #222;
+        }
+        
+        .value-card p {
+            color: #777;
+            line-height: 1.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .milestones {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .milestones {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="../assets/img/logo.png" alt="Wahl Professional Logo">
+                </a>
+            </div>
+            <div class="nav-right">
+                <div class="cambio-tema">
+                    <i class="fa-solid fa-sun" style="color: #FFD43B;"></i>
+                </div>
+                <ul class="menu">
+                    <li class="list-item"><a href="../index.html" class="link">INICIO</a></li>
+                    <li class="list-item"><a href="machines.html" class="link">MAQUINAS</a></li>
+                    <li class="list-item"><a href="about.html" class="link active">NOSOTROS</a></li>
+                    <li class="list-item"><a href="contact.html" class="link">CONTACTO</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Nuestra Historia</h1>
+            <p>Más de un siglo de innovación en herramientas para barberos</p>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>Desde 1919</h2>
+                    <p>Wahl Professional nació en 1919 cuando Leo J. Wahl inventó el primer motor magnético para máquinas de cortar pelo. Lo que comenzó como una innovación en el garaje de su tío se convirtió en la base de una empresa que revolucionaría la industria de la barbería.</p>
+                    <p>Hoy, Wahl Professional sigue siendo líder en la fabricación de herramientas para barberos y peluqueros, manteniendo el mismo compromiso con la calidad y la innovación que nos ha distinguido por más de un siglo.</p>
+                    <div class="milestones">
+                        <div class="milestone">
+                            <h3>100+</h3>
+                            <p>Años de experiencia</p>
+                        </div>
+                        <div class="milestone">
+                            <h3>50+</h3>
+                            <p>Países con presencia</p>
+                        </div>
+                        <div class="milestone">
+                            <h3>1M+</h3>
+                            <p>Profesionales que confían en nosotros</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="" alt="Historia de Wahl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section">
+        <div class="container">
+            <h2>Nuestro Equipo</h2>
+            <p>Profesionales apasionados por la barbería y la innovación</p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../assets/img/team/team1.jpg" alt="CEO de Wahl Professional">
+                    </div>
+                    <div class="member-info">
+                        <h3>PEPON</h3>
+                        <p>CEO & Fundador</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../assets/img/team/team2.jpg" alt="Directora de Diseño">
+                    </div>
+                    <div class="member-info">
+                        <h3>PEPOTE</h3>
+                        <p>Directora de Diseño</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../assets/img/team/team3.jpg" alt="Jefe de Ingeniería">
+                    </div>
+                    <div class="member-info">
+                        <h3>PEPITO</h3>
+                        <p>Jefe de Ingeniería</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../assets/img/team/team4.jpg" alt="Directora de Marketing">
+                    </div>
+                    <div class="member-info">
+                        <h3>PEPE</h3>
+                        <p>Directora de Marketing</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values-section">
+        <div class="container">
+            <h2>Nuestros Valores</h2>
+            <p class="subtitle">Principios que guían cada decisión que tomamos</p>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-medal"></i>
+                    <h3>Calidad</h3>
+                    <p>Nos comprometemos con los más altos estándares de fabricación y durabilidad en cada producto que creamos.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Innovación</h3>
+                    <p>Pioneros en tecnología para herramientas profesionales de barbería, siempre buscando mejorar.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Servicio</h3>
+                    <p>Soporte técnico y atención al cliente excepcionales, porque tu éxito es nuestro éxito.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>Comunidad</h3>
+                    <p>Apoyamos y educamos a la comunidad de barberos en todo el mundo a través de eventos y capacitaciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<BR></BR>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="../assets/img/logo.png" alt="Wahl Professional" class="footer-logo">
+                    <p>Desde 1919, proporcionando herramientas profesionales para barberos y peluqueros.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="machines.html">Máquinas</a></li>
+                        <li><a href="about.html">Nosotros</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                     <p><i class="fas fa-map-marker-alt"></i> Av. Argentina 123, Neuquén, Argentina (8300)</p>
+                    <p><i class="fas fa-phone"></i> +54 299 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@wahl.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Wahl Professional. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

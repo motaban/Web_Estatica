@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wahl Professional | Máquinas</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos */
+        .machines-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('../assets/img/machines-bg.jpg') center/cover;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .machines-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .search-input, .filter-select {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            flex-grow: 1;
+            min-width: 200px;
+        }
+        
+        .machines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .machine-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: #1e1e1e;
+        }
+        
+        .machine-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .machine-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+        
+        .machine-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s;
+        }
+        
+        .machine-card:hover .machine-image img {
+            transform: scale(1.05);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #FFD700;
+            color: #000;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .machine-info {
+            padding: 1.5rem;
+        }
+        
+        .machine-meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+        }
+        
+        .category {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .category.cordless {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .category.corded {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+        
+        .category.trimmer {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .category.clipper {
+            background: #f3e5f5;
+            color: #8e24aa;
+        }
+        
+       
+        
+        .machine-specs {
+            margin: 1rem 0;
+        }
+        
+        .machine-specs h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .machine-specs ul {
+            list-style-type: none;
+            padding-left: 0;
+            font-size: 0.9rem;
+        }
+        
+        .machine-specs li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .machine-actions {
+            margin-top: 1.5rem;
+        }
+        
+        .compare-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .compare-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .compare-btn.active {
+            background: #4CAF50;
+            color: rgb(0, 0, 0);
+        }
+        
+        .compare-btn .fas {
+            transition: transform 0.3s;
+        }
+        
+        .compare-btn.active .fas {
+            transform: scale(1.2);
+        }
+        
+        /* Modal de comparación */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .modal-content {
+            background: #1e1e1e;
+            border-radius: 8px;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #000;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .comparison-table th, 
+        .comparison-table td {
+            padding: 12px 15px;
+            text-align: left;
+            
+        }
+        .comparison-table th {
+            background-color: #0e0d0d;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:hover td {
+            background-color: #252525;
+        }
+        
+        .comparison-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        /* Mensajes de estado */
+        .loading-message, 
+        .error-message, 
+        .no-results {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        .loading-message i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error-message i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #f44336;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .filters {
+                flex-direction: column;
+            }
+            
+            .machines-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 20px 15px;
+            }
+            
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+            
+            .comparison-table th, 
+            .comparison-table td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../assets/img/logo.png" alt="Wahl Professional Logo">
+                </a>
+            </div>
+            <div class="nav-right">
+                <div class="cambio-tema">
+                    <i class="fa-solid fa-sun" style="color: #FFD43B;"></i>
+                </div>
+                <ul class="menu">
+                    <li class="list-item"><a href="../index.html" class="link">INICIO</a></li>
+                    <li class="list-item"><a href="machines.html" class="link active">MAQUINAS</a></li>
+                    <li class="list-item"><a href="about.html" class="link">NOSOTROS</a></li>
+                    <li class="list-item"><a href="contact.html" class="link">CONTACTO</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Seccion de Maquinas -->
+    <main class="machines-page">
+        <section class="machines-hero">
+            <div class="container">
+                <h1>Nuestras Máquinas</h1>
+                <p>Descubre la gama completa de herramientas profesionales Wahl</p>
+            </div>
+        </section>
+
+        <section class="machines-content">
+            <div class="container">
+                <div class="filters">
+                    <input type="text" id="searchMachines" placeholder="Buscar máquinas..." class="search-input">
+                    <select id="filterCategory" class="filter-select">
+                        <option value="all">Todas las categorías</option>
+                        <option value="cordless">Inalámbricas</option>
+                        <option value="corded">Con cable</option>
+                        <option value="trimmer">Recortadoras</option>
+                        <option value="clipper">Cortadoras</option>
+                    </select>
+                    <button id="compareBtn" class="cta-button" disabled>Comparar (0)</button>
+                </div>
+
+                <div class="machines-grid" id="machinesContainer">
+                    <!-- Los productos se cargarán aquí -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal de Comparacion -->
+        <div id="comparisonModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Comparación de Máquinas</h2>
+                <div id="comparisonContainer"></div>
+                <div class="comparison-actions">
+                    <button onclick="clearComparison()" class="cta-button">Cerrar y limpiar selección</button>
+                </div>
+            </div>
+        </div>
+    </main>
+<br><br>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="../assets/img/logo.png" alt="Wahl Professional" class="footer-logo">
+                    <p>Desde 1919, proporcionando herramientas profesionales para barberos y peluqueros.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="../index.html">Inicio</a></li>
+                        <li><a href="machines.html">Máquinas</a></li>
+                        <li><a href="about.html">Nosotros</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Argentina 123, Neuquén, Argentina (8300)</p>
+                    <p><i class="fas fa-phone"></i> +54 299 123-4567
+</p>
+                    <p><i class="fas fa-envelope"></i> info@wahl.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Wahl Professional. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Aca se agregan los productos
+        const allProducts = [
+            {
+                id: 1,
+                name: "Magic Clip Cordless",
+                description: "Cortadora profesional inalámbrica con tecnología Lithium Ion.",
+                category: "cordless",
+                featured: true,
+                image: "100year.jpg",
+                specs: {
+                    motor: "Rotativo",
+                    velocidad: "7000 RPM",
+                    peso: "0.45 kg",
+                    duracion_bateria: "90 minutos",
+                    carga: "1 hora"
+                }
+            },
+            {
+                id: 2,
+                name: "Senior Corded",
+                description: "Cortadora profesional con cable, potente y duradera.",
+                category: "corded",
+                featured: false,
+                image: "detailer.jpg",
+                specs: {
+                    motor: "Magnetic",
+                    velocidad: "6500 RPM",
+                    peso: "0.5 kg",
+                    cable: "3 metros",
+                    garantia: "5 años"
+                }
+            },
+            {
+                id: 3,
+                name: "Detailer Li Trimmer",
+                description: "Recortadora de precisión inalámbrica para acabados perfectos.",
+                category: "trimmer",
+                featured: true,
+                image: "detailer.jpg",
+                specs: {
+                    motor: "Rotativo",
+                    velocidad: "6000 RPM",
+                    peso: "0.3 kg",
+                    duracion_bateria: "120 minutos",
+                    ancho_cuchilla: "16 mm"
+                }
+            },
+            {
+                id: 4,
+                name: "Legend Clipper",
+                description: "Cortadora profesional de alto rendimiento para uso intensivo.",
+                category: "clipper",
+                featured: false,
+                image: "legend.jpg",
+                specs: {
+                    motor: "Rotativo",
+                    velocidad: "7200 RPM",
+                    peso: "0.55 kg",
+                    cable: "3 metros",
+                    garantia: "7 años"
+                }
+            },
+            {
+                id: 5,
+                name: "Sterling Mag Trimmer",
+                description: "Recortadora magnética para un rendimiento constante.",
+                category: "trimmer",
+                featured: false,
+                image: "legend.jpg",
+                specs: {
+                    motor: "Magnetic",
+                    velocidad: "5800 RPM",
+                    peso: "0.35 kg",
+                    cable: "2.5 metros",
+                    ancho_cuchilla: "14 mm"
+                }
+            },
+            {
+                id: 6,
+                name: "V5000 Cordless Clipper",
+                description: "Cortadora inalámbrica versátil para todo tipo de cortes.",
+                category: "cordless",
+                featured: true,
+                image: "legend.jpg",
+                specs: {
+                    motor: "Rotativo",
+                    velocidad: "6800 RPM",
+                    peso: "0.48 kg",
+                    duracion_bateria: "100 minutos",
+                    carga: "45 minutos"
+                }
+            }
+        ];
+
+        let productsToCompare = [];
+
+
+        // Guardar productos destacados en localStorage
+        function saveFeaturedProducts() {
+    const featuredProducts = allProducts.filter(product => product.featured);
+    localStorage.setItem('wahlFeaturedProducts', JSON.stringify(featuredProducts));
+}
+
+// Llamar a esta función cuando se cargue la página
+document.addEventListener('DOMContentLoaded', saveFeaturedProducts);
+
+
+        // Cargar productos cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            displayProducts(allProducts);
+            setupEventListeners();
+        });
+        
+        // Mostrar productos en el grid
+        function displayProducts(products) {
+            const container = document.getElementById('machinesContainer');
+            if (!container) return;
+            
+            if (!products || products.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-box-open"></i>
+                        <p>No se encontraron productos</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = products.map(product => {
+                // Manejo seguro de la ruta de la imagen
+                const imagePath = product.image 
+                    ? `../assets/img/products/${product.image}`
+                    : '../assets/img/placeholder.jpg';
+                
+                return `
+                <div class="machine-card" data-id="${product.id}" data-category="${product.category}">
+                    <div class="machine-image">
+                        <img src="${imagePath}" alt="${product.name}" loading="lazy"
+                             onerror="this.src='../assets/img/placeholder.jpg'">
+                        ${product.featured ? '<span class="featured-badge">Destacado</span>' : ''}
+                    </div>
+                    <div class="machine-info">
+                        <h3>${product.name}</h3>
+                        <div class="machine-meta">
+                            <span class="category ${product.category}">${getCategoryName(product.category)}</span>
+                            
+                        </div>
+                        <p class="description">${product.description}</p>
+                        <div class="machine-specs">
+                            <h4>Especificaciones:</h4>
+                            <ul>
+                                ${Object.entries(product.specs).slice(0, 3).map(([key, value]) => `
+                                    <li><strong>${formatSpecName(key)}:</strong> ${value}</li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        <button class="compare-btn ${productsToCompare.includes(product.id) ? 'active' : ''}" data-id="${product.id}">
+                            <i class="fas fa-${productsToCompare.includes(product.id) ? 'check' : 'exchange-alt'}"></i>
+                            ${productsToCompare.includes(product.id) ? 'Seleccionado' : 'Comparar'}
+                        </button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+            
+            setupCompareButtons();
+        }
+        
+        // Configurar event listeners
+        function setupEventListeners() {
+            // Filtro de búsqueda
+            document.getElementById('searchMachines').addEventListener('input', function() {
+                filterProducts(this.value.toLowerCase());
+            });
+            
+            // Filtro de categoría
+            document.getElementById('filterCategory').addEventListener('change', function() {
+                filterProducts(null, this.value);
+            });
+            
+            // Botón de comparar
+            document.getElementById('compareBtn').addEventListener('click', showComparisonModal);
+            
+            // Cerrar modal
+            document.querySelector('.close-modal').addEventListener('click', () => {
+                document.getElementById('comparisonModal').style.display = 'none';
+            });
+            
+            // Cerrar modal al hacer clic fuera
+            document.getElementById('comparisonModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                }
+            });
+        }
+        
+        // Configurar botones de comparación
+        function setupCompareButtons() {
+            document.querySelectorAll('.compare-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.dataset.id);
+                    toggleProductComparison(productId);
+                    
+                    // Animación
+                    this.classList.add('pulse');
+                    setTimeout(() => this.classList.remove('pulse'), 300);
+                });
+            });
+        }
+        
+        // Alternar producto en comparación
+        function toggleProductComparison(productId) {
+            const compareBtn = document.getElementById('compareBtn');
+            const index = productsToCompare.indexOf(productId);
+            
+            if (index === -1) {
+                // Agregar a comparación (máximo 3 productos)
+                if (productsToCompare.length < 3) {
+                    productsToCompare.push(productId);
+                    
+                    // Actualizar botón
+                    const button = document.querySelector(`.compare-btn[data-id="${productId}"]`);
+                    if (button) {
+                        button.classList.add('active');
+                        button.innerHTML = '<i class="fas fa-check"></i> Seleccionado';
+                    }
+                } else {
+                    alert('Máximo 3 productos para comparar');
+                    return;
+                }
+            } else {
+                // Quitar de comparación
+                productsToCompare.splice(index, 1);
+                
+                // Actualizar botón
+                const button = document.querySelector(`.compare-btn[data-id="${productId}"]`);
+                if (button) {
+                    button.classList.remove('active');
+                    button.innerHTML = '<i class="fas fa-exchange-alt"></i> Comparar';
+                }
+            }
+            
+            // Actualizar botón de comparar
+            if (compareBtn) {
+                compareBtn.textContent = `Comparar (${productsToCompare.length})`;
+                compareBtn.disabled = productsToCompare.length < 2;
+            }
+        }
+        
+        // Filtrar productos
+        function filterProducts(searchTerm = '', category = 'all') {
+            let filtered = [...allProducts];
+            
+            // Filtrar por categoría
+            if (category !== 'all') {
+                filtered = filtered.filter(p => p.category === category);
+            }
+            
+            // Filtrar por búsqueda
+            if (searchTerm) {
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(searchTerm) || 
+                    p.description.toLowerCase().includes(searchTerm) ||
+                    Object.entries(p.specs).some(([key, value]) => 
+                        value.toString().toLowerCase().includes(searchTerm)
+                    )
+                );
+            }
+            
+            displayProducts(filtered);
+        }
+        
+        // Mostrar modal de comparación
+        function showComparisonModal() {
+            if (productsToCompare.length < 2) return;
+            
+            const modal = document.getElementById('comparisonModal');
+            const container = document.getElementById('comparisonContainer');
+            
+            // Obtener productos seleccionados
+            const selectedProducts = allProducts.filter(p => productsToCompare.includes(p.id));
+            
+            // Obtener todas las especificaciones posibles
+            const allSpecs = new Set();
+            selectedProducts.forEach(p => {
+                Object.keys(p.specs).forEach(spec => allSpecs.add(spec));
+            });
+            
+            // Generar tabla de comparación
+            container.innerHTML = `
+                <div class="comparison-table-container">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Especificación</th>
+                                ${selectedProducts.map(p => `<th>${p.name}</th>`).join('')}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${Array.from(allSpecs).map(spec => `
+                                <tr>
+                                    <td>${formatSpecName(spec)}</td>
+                                    ${selectedProducts.map(p => `<td>${p.specs[spec] || '-'}</td>`).join('')}
+                                </tr>
+                            `).join('')}
+                            
+                            <tr>
+                                <td>Categoría</td>
+                                ${selectedProducts.map(p => `<td>${getCategoryName(p.category)}</td>`).join('')}
+                            </tr>
+                            <tr>
+                                <td>Descripción</td>
+                                ${selectedProducts.map(p => `<td>${p.description}</td>`).join('')}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            // Mostrar modal
+            modal.style.display = 'block';
+        }
+        
+        // Función global para limpiar comparación
+        window.clearComparison = function() {
+            productsToCompare = [];
+            document.getElementById('compareBtn').textContent = 'Comparar (0)';
+            document.getElementById('compareBtn').disabled = true;
+            document.getElementById('comparisonModal').style.display = 'none';
+            
+            // Resetear botones de comparación
+            document.querySelectorAll('.compare-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.innerHTML = '<i class="fas fa-exchange-alt"></i> Comparar';
+            });
+            
+            // Volver a mostrar todos los productos
+            displayProducts(allProducts);
+        };
+        
+        // Funciones auxiliares
+        function getCategoryName(category) {
+            const categories = {
+                'cordless': 'Inalámbrica',
+                'corded': 'Con cable',
+                'trimmer': 'Recortadora',
+                'clipper': 'Cortadora'
+            };
+            return categories[category] || category;
+        }
+        
+        function formatSpecName(spec) {
+            return spec.replace(/_/g, ' ')
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        }
+    </script>
+</body>
+</html>
