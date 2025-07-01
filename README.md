@@ -1,4 +1,4 @@
-Este repositorio contiene la página de máquinas profesionales para barberos de Wahl Professional, implementada con HTML, CSS y JavaScript puro.
+Página de máquinas profesionales para barberos de Wahl Professional, implementada con HTML, CSS y JavaScript Vanilla.
 
 🚀 Características principales
 Catálogo de productos: Muestra todas las máquinas profesionales disponibles
